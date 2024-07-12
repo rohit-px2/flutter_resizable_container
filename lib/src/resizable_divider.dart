@@ -4,6 +4,7 @@ class ResizableDivider {
   const ResizableDivider({
     this.thickness = 1.0,
     this.size = 2.0,
+    this.dividerBuilder,
     this.color,
     this.indent,
     this.endIndent,
@@ -16,6 +17,14 @@ class ResizableDivider {
   ///
   /// Defaults to 1.0.
   final double thickness;
+
+  /// The builder to use for the divider. If this is provided,
+  /// the attributes [color], [indent], [endIndent], [onHoverEnter], 
+  /// and [onHoverExit] will be ignored.
+  /// The builder is passed the index, as well as the size
+  /// of the divider area it must fill.
+  /// Defaults to null.
+  final Widget Function(int, Size)? dividerBuilder;
 
   /// The divider's size (height/width) extent.
   /// The divider line will be drawn in the center of this space.

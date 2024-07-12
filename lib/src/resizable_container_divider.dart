@@ -6,11 +6,13 @@ import 'package:flutter_resizable_container/src/resizable_divider.dart';
 class ResizableContainerDivider extends StatefulWidget {
   const ResizableContainerDivider({
     super.key,
+    required this.index,
     required this.direction,
     required this.onResizeUpdate,
     required this.config,
   });
 
+  final int index;
   final Axis direction;
   final void Function(double) onResizeUpdate;
   final ResizableDivider config;
@@ -44,7 +46,9 @@ class _ResizableContainerDividerState extends State<ResizableContainerDivider> {
           height: height,
           width: width,
           child: Center(
-            child: CustomPaint(
+            child: widget.config.dividerBuilder != null 
+              ? widget.config.dividerBuilder!(widget.index, Size(width, height))
+              : CustomPaint(
               size: Size(width, height),
               painter: DividerPainter(
                 direction: widget.direction,
